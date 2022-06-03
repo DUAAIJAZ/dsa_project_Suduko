@@ -41,6 +41,47 @@ class Grid:
                 self.cubes[row][col].set_temp(0)
                 self.update_model()
                 return False
+            #setting temp value for the cube
+    def sketch(self, val):
+        row, col = self.selected
+        self.cubes[row][col].set_temp(val)
+
+    def draw(self):
+        # Draw Grid Lines
+        gap = self.width / 6
+        for i in range(self.rows):
+            if i % 2 == 0 and i != 0:
+                thick = 5
+                pygame.draw.line(self.win, (0,200,0), (0, i * gap), (self.width, i*gap), thick) # for vertical line
+            for j in range(self.rows):
+                if i % 3 == 0 and i != 0:
+                    thick = 5
+                    #pygame.draw.line(self.win, (0,255,0), (0, i * gap), (self.width, i*gap), thick) # for vertical line
+                    pygame.draw.line(self.win, (150, 0, 200), (i * gap, 0), (i * gap, self.height), thick) # for Horizontal line
+            pygame.draw.line(self.win, (0,250,0), (0, i * gap), (self.width, i*gap), 2) # for vertical line
+
+
+            pygame.draw.line(self.win, (150, 0, 200), (i * gap, 0), (i * gap, self.height),2) # for Horizontal line
+
+
+        # Draw Cubes
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.cubes[i][j].draw(self.win)
+
+    def select(self, row, col):
+        # Reset all other
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.cubes[i][j].selected = False
+
+        self.cubes[row][col].selected = True
+        self.selected = (row, col)
+
+    def clear(self):
+        row, col = self.selected
+        if self.cubes[row][col].value == 0:
+            self.cubes[row][col].set_temp(0)
 
 
 
