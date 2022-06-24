@@ -150,7 +150,7 @@ class Grid:
 
         return False
 
-0#6 rows and 6 coloumns
+#6 rows and 6 coloumns
 class Cube:
     rows = 6
     cols = 6
@@ -207,7 +207,7 @@ class Cube:
 def find_empty(bo):# Defining function to find empty squares by 0.
     for i in range(len(bo)):# Finding the empty blanks in the columns of the board.
         for j in range(len(bo[0])):# Finding the empty spaces in the rows, in other words the 0 in the rows of the board.
-            if bo[i][j] == 0:# Check if the position is 0.
+            if bo[i][j] == 0 :# Check if the position is 0.
                 return (i, j)  # row, col
 
     return None# If there is no squares that equals to 0 then it will trigger the find solution and make it true and say we are done.
@@ -232,7 +232,8 @@ def valid(bo, num, pos): # Checking each row if its equal to the number entered.
     # This will loop all elements in those squares/boxes and make sure that the same numbers wont appear twice.
     for i in range(box_y*2, box_y*2+2): # Here we multiply the square that are from the X value with 3 to get to index 6.
         for j in range(box_x *3 , box_x*3+3): # Same as above, we multiply squares from Y value with 3 to get to index 6.
-            if bo[i][j] == num and (i,j) != pos: # Checks if all elements in board are equal to the num added, and making sure it doesnt checks same position we added in and finally if that is true, it will return false because of duplicate numbers.
+            if bo[i][j] == num and (i,j) != pos: # Checks if all elements in board are equal to the num added,
+                #and making sure it doesnt checks same position we added in and finally if that is true, it will return false because of duplicate numbers.
                 return False
 
     return True
@@ -311,12 +312,12 @@ def main():
 
                 if event.key == pygame.K_RETURN:
                     i, j = board.selected
-                    if board.cubes[i][j].temp != 0:
+                    if board.cubes[i][j].temp == 0:
                         if board.place(board.cubes[i][j].temp):
                             #user has selected right value
-                            print("Success")
+                            print()
                         else:#user has entered wrong digit
-                            print("Wrong")
+                            print()
                             strikes += 1
                         key = None
            #when the game is over
@@ -328,6 +329,7 @@ def main():
                 clicked = board.click(pos)
                 if clicked:
                     board.select(clicked[0], clicked[1])
+                    
                     key = None
 
         if board.selected and key != None:
@@ -339,5 +341,6 @@ def main():
 #callinf functions
 main()
 pygame.quit()
+
 
 
